@@ -7,3 +7,32 @@ metadata:
 spec:
   interval: 10m0s
   url: https://agones.dev/chart/stable
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: agones
+  namespace: agones-system
+spec:
+  chart:
+    spec:
+      chart: agones
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: agones
+  values:
+    agones:
+      allocator:
+        install: true
+        service:
+          serviceType: ClusterIP
+      ping:
+        http:
+          serviceType: ClusterIP
+        udp:
+          serviceType: ClusterIP
+    gameservers:
+      namespaces:
+        - shulker-system
+  interval: 5m0s
