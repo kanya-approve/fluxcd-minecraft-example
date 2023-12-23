@@ -1,0 +1,16 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: shulker-system
+  namespace: shulker-system
+spec:
+  ignore: |-
+    # exclude all
+    /*
+    # include charts directory only
+    !/kube/helm
+  interval: 5m0s
+  ref:
+    tag: v0.4.0
+  url: https://github.com/jeremylvln/Shulker
