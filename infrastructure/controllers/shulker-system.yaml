@@ -5,7 +5,7 @@ metadata:
   name: shulker
   namespace: shulker-system
 spec:
-  ignore: |-
+  ignore: |
     # exclude all
     /*
     # include charts directory only
