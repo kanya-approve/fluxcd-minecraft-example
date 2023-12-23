@@ -2,7 +2,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: shulker-system
+  name: shulker
   namespace: shulker-system
 spec:
   ignore: |-
@@ -14,3 +14,18 @@ spec:
   ref:
     tag: v0.4.0
   url: https://github.com/jeremylvln/Shulker
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: shulker
+  namespace: shulker-system
+spec:
+  chart:
+    spec:
+      chart: shulker
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: GitRepository
+        name: shulker
+  interval: 5m0s
