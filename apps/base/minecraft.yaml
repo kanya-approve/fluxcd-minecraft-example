@@ -2,7 +2,7 @@
 apiVersion: shulkermc.io/v1alpha1
 kind: MinecraftCluster
 metadata:
-  name: minecraft
+  name: minecraft-cluster
   namespace: apps
 spec:
   networkAdmins:
@@ -11,11 +11,11 @@ spec:
 apiVersion: shulkermc.io/v1alpha1
 kind: ProxyFleet
 metadata:
-  name: minecraft
+  name: minecraft-proxy
   namespace: apps
 spec:
   clusterRef:
-    name: minecraft
+    name: minecraft-cluster
   replicas: 1
   service:
     type: ClusterIP
@@ -29,16 +29,16 @@ spec:
 apiVersion: shulkermc.io/v1alpha1
 kind: MinecraftServerFleet
 metadata:
-  name: minecraft
+  name: minecraft-server-fleet
   namespace: apps
 spec:
   clusterRef:
-    name: minecraft
+    name: minecraft-cluster
   replicas: 1
   template:
     spec:
       clusterRef:
-        name: minecraft
+        name: minecraft-cluster
       tags:
         - lobby
         - vanilla
